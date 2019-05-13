@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DataTransferSimulator.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Scrambling.h" />
     <ClInclude Include="stdafx.h" />
