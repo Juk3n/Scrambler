@@ -4,6 +4,7 @@
 #include <fstream>
 #include <bitset>
 #include <vector>
+#include <iostream>
 
 class FileReader
 {
@@ -39,6 +40,7 @@ public:
 		while (file.get(c))
 		{
 			std::string stringOfBits{ convertSetOfBitsOfCharToString(c) };
+			
 			addStringOfBitsToBits(stringOfBits);		
 		}
 		
@@ -47,7 +49,9 @@ public:
 
 	void saveToFile(std::string fileName)
 	{
-
+		//bity do zapisania kumuluje do 16bitowych/2bajtowych stringow
+		//potem te stringi convertuje do charow
+		//chary wrzuca do pliku i powinno byc ok
 	}
 
 	~FileReader() {}
