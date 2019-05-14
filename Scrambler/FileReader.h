@@ -45,6 +45,11 @@ public:
 		return bits;
 	}
 
+	void saveToFile(std::string fileName)
+	{
+
+	}
+
 	~FileReader() {}
 };
 
