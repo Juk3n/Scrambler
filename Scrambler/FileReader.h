@@ -32,6 +32,7 @@ public:
 
 		if (!file.is_open())
 		{
+			file.close();
 			throw "Error while reading file";
 		}
 		
@@ -44,14 +45,37 @@ public:
 			addStringOfBitsToBits(stringOfBits);		
 		}
 		
+		file.close();
 		return bits;
 	}
 
-	void saveToFile(std::string fileName)
+	void saveToFile(std::vector<bool> dataToSave, std::string fileName)
 	{
+		std::ofstream file{ fileName, std::ios::out | std::ios::binary };
+
+		if (!file.is_open())
+		{
+			throw "Error while reading file";
+		}
+
 		//bity do zapisania kumuluje do 16bitowych/2bajtowych stringow
-		//potem te stringi convertuje do charow
-		//chary wrzuca do pliku i powinno byc ok
+		std::string stringOfBits{};
+		for (bool bit : dataToSave)
+		{
+			stringOfBits.push_back((bit ? '1' : '0'));
+			if (stringOfBits.length() == 16)
+			{
+				//potem te stringi convertuje do charow
+				auto byte = std::bitset<16>(stringOfBits);
+				char byteChar = byte.to_ulong();
+				
+				//chary wrzuca do pliku i powinno byc ok
+				file.put(byteChar);
+				stringOfBits.clear();
+			}
+		}
+
+		file.close();
 	}
 
 	~FileReader() {}

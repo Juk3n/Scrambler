@@ -4,9 +4,19 @@
 
 class Scrambling
 {
-	std::vector<bool> createSyncWord()
+	std::vector<bool> createSyncWord(int length)
 	{
-		std::vector<bool> syncWord{ 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1 };
+		std::vector<bool> syncWord;
+		
+		syncWord.push_back(0);
+		for (int i = 1; i < length; i++)
+		{
+			syncWord.push_back(!syncWord[i - 1]);
+		}
+		for (bool bit : syncWord)
+		{
+			std::cout << bit;
+		}
 
 		return syncWord;
 	}
@@ -36,7 +46,7 @@ public:
 	std::vector<bool> scrambleAdditive(std::vector<bool> input)
 	{
 		int inputLength{ static_cast<int>(input.size()) };
-		std::vector<bool> syncWord{ createSyncWord() };
+		std::vector<bool> syncWord{ createSyncWord(inputLength) };
 
 		std::vector<bool> scrambledInput;
 
