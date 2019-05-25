@@ -16,13 +16,10 @@ T random(T min, T max) {
 
 class DataTransferSimulator
 {
-	int acceptableLengthBitSeries{};
 	int numberOfRandomData{};
 
 	std::vector<bool> data;
 	std::vector<bool> dataAfterSimulation;
-
-	std::function<int(int)> isNumOfRepetitionsReachedLimit = [&](int number) {return int(number >= acceptableLengthBitSeries); };
 	
 	void clearInformations()
 	{
@@ -50,8 +47,8 @@ class DataTransferSimulator
 		}
 	}
 
-	//old fashioned
-	void sendThroughTransmissionCanal()
+	//kiedy zbyt wiele bitów obok siebie jest takich samych, nastêpuje przek³amanie
+	void sendThroughTransmissionCanal(int acceptableLengthBitSeries)
 	{
 		bool lastBit{ 0 };
 		int numOfRepetitions{};
@@ -62,7 +59,7 @@ class DataTransferSimulator
 			{
 				numOfRepetitions++;
 
-				if (isNumOfRepetitionsReachedLimit(numOfRepetitions))
+				if (numOfRepetitions >= acceptableLengthBitSeries)
 				{
 					numberOfRandomData++;
 					dataAfterSimulation.push_back(random(0, 1));
@@ -82,7 +79,7 @@ class DataTransferSimulator
 	}
 
 public:
-	DataTransferSimulator(int length) :acceptableLengthBitSeries(length){}
+	DataTransferSimulator() {}
 
 	void setDataToSend(std::vector<bool> data)
 	{
@@ -92,7 +89,7 @@ public:
 	void simulateSendingData()
 	{
 		clearInformations();
-		sendThroughTransmissionCanal();	
+		//sendThroughTransmissionCanal();	
 	}
 
 	std::vector<bool> getDataAfterSimulation()
