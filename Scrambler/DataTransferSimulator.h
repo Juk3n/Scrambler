@@ -29,25 +29,34 @@ class DataTransferSimulator
 		dataAfterSimulation.clear();
 		numberOfRandomData = 0;
 	}
-public:
-	DataTransferSimulator(int length) :acceptableLengthBitSeries(length){}
 
-	void setDataToSend(std::vector<bool> data)
+	//chanceOfDisruption - w ci¹gu ilu wartoœci jest szansa na jedno przek³amanie
+	void sendThroughTransmissionCanal(int chanceOfDisruption)
 	{
-		this->data = data;
+		int iterator{};
+
+		for (bool bit : data)
+		{
+			iterator++;
+			if (iterator >= chanceOfDisruption)
+			{
+				dataAfterSimulation.push_back(random(0, 1));
+				iterator = 0;
+			}
+			else
+			{
+				dataAfterSimulation.push_back(bit);
+			}
+		}
 	}
 
-	void simulateSendingData()
+	//old fashioned
+	void sendThroughTransmissionCanal()
 	{
-		clearInformations();
-
-		dataAfterSimulation.clear();
-		numberOfRandomData = 0;
-
-		bool lastBit{0};
+		bool lastBit{ 0 };
 		int numOfRepetitions{};
 
-		for (bool bit : data )
+		for (bool bit : data)
 		{
 			if (bit == lastBit)
 			{
@@ -61,7 +70,7 @@ public:
 				else
 				{
 					dataAfterSimulation.push_back(bit);
-				}				
+				}
 			}
 			else
 			{
@@ -70,6 +79,20 @@ public:
 				dataAfterSimulation.push_back(bit);
 			}
 		}
+	}
+
+public:
+	DataTransferSimulator(int length) :acceptableLengthBitSeries(length){}
+
+	void setDataToSend(std::vector<bool> data)
+	{
+		this->data = data;
+	}
+
+	void simulateSendingData()
+	{
+		clearInformations();
+		sendThroughTransmissionCanal();	
 	}
 
 	std::vector<bool> getDataAfterSimulation()

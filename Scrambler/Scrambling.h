@@ -13,10 +13,6 @@ class Scrambling
 		{
 			syncWord.push_back(!syncWord[i - 1]);
 		}
-		for (bool bit : syncWord)
-		{
-			std::cout << bit;
-		}
 
 		return syncWord;
 	}
@@ -31,6 +27,7 @@ class Scrambling
 			syncWord[i] = syncWord[i - 1];
 		}
 		syncWord[0] = lastSyncWordBit;
+
 
 		return syncWord;
 	}
@@ -55,8 +52,10 @@ public:
 		{
 			lastSyncWordBit = syncWord[inputLength - 1];
 			bool scrambledBit{moduloTwoAddition(input[i], lastSyncWordBit)};
-			scrambledInput.push_back(scrambledBit);
-
+			scrambledInput.push_back(scrambledBit);	
+			
+			std::cout << i << " ";
+			
 			syncWord = reorganizeSyncWord(syncWord);			
 		}
 		return scrambledInput;
