@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 class Scrambling
 {
@@ -13,21 +14,19 @@ class Scrambling
 		{
 			syncWord.push_back(!syncWord[i - 1]);
 		}
-
 		return syncWord;
 	}
 
 	std::vector<bool> reorganizeSyncWord(std::vector<bool> syncWord)
 	{
-		int inputLength{ static_cast<int>(syncWord.size()) };
-		bool lastSyncWordBit = syncWord[inputLength - 1];
+		int syncWordLength{ static_cast<int>(syncWord.size()) };
+		bool lastSyncWordBit = syncWord[syncWordLength - 1];
 
-		for (int i{ inputLength - 1 }; i > 0; i--)
+		for (int i{ syncWordLength - 1 }; i > 0; i--)
 		{
 			syncWord[i] = syncWord[i - 1];
 		}
 		syncWord[0] = lastSyncWordBit;
-
 
 		return syncWord;
 	}
@@ -43,20 +42,19 @@ public:
 	std::vector<bool> scrambleAdditive(std::vector<bool> input)
 	{
 		int inputLength{ static_cast<int>(input.size()) };
-		std::vector<bool> syncWord{ createSyncWord(inputLength) };
+		std::vector<bool> syncWord{ createSyncWord(15) };
+		
 
 		std::vector<bool> scrambledInput;
 
-		bool lastSyncWordBit{};
+		bool bitToScrambleWith{};
 		for (int i{}; i < inputLength; i++)
 		{
-			lastSyncWordBit = syncWord[inputLength - 1];
-			bool scrambledBit{moduloTwoAddition(input[i], lastSyncWordBit)};
+			bitToScrambleWith = syncWord[14];
+			bool scrambledBit{moduloTwoAddition(input[i], bitToScrambleWith)};
+
 			scrambledInput.push_back(scrambledBit);	
-			
-			std::cout << i << " ";
-			
-			syncWord = reorganizeSyncWord(syncWord);			
+			syncWord = reorganizeSyncWord(syncWord);
 		}
 		return scrambledInput;
 	}

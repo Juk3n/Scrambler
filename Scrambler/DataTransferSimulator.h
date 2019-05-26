@@ -28,7 +28,7 @@ class DataTransferSimulator
 	}
 
 	//chanceOfDisruption - w ci¹gu ilu wartoœci jest szansa na jedno przek³amanie
-	void sendThroughTransmissionCanal(int chanceOfDisruption)
+	void sendThroughTransmissionCanalA(int chanceOfDisruption)
 	{
 		int iterator{};
 
@@ -48,7 +48,7 @@ class DataTransferSimulator
 	}
 
 	//kiedy zbyt wiele bitów obok siebie jest takich samych, nastêpuje przek³amanie
-	void sendThroughTransmissionCanal(int acceptableLengthBitSeries)
+	void sendThroughTransmissionCanalB(int acceptableLengthBitSeries)
 	{
 		bool lastBit{ 0 };
 		int numOfRepetitions{};
@@ -89,7 +89,7 @@ public:
 	void simulateSendingData()
 	{
 		clearInformations();
-		//sendThroughTransmissionCanal();	
+		sendThroughTransmissionCanalB(5);	
 	}
 
 	std::vector<bool> getDataAfterSimulation()
