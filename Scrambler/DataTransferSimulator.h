@@ -50,7 +50,7 @@ class DataTransferSimulator
 	//kiedy zbyt wiele bitów obok siebie jest takich samych, nastêpuje przek³amanie
 	void sendThroughTransmissionCanalB(int acceptableLengthBitSeries)
 	{
-		bool lastBit{ 0 };
+		bool lastBit{ !data[0] };
 		int numOfRepetitions{};
 
 		for (bool bit : data)
