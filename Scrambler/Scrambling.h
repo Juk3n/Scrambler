@@ -17,18 +17,18 @@ class Scrambling
 		return syncWord;
 	}
 
-	std::vector<bool> reorganizeSyncWord(std::vector<bool> syncWord)
+	std::vector<bool> reorganizeData(std::vector<bool> data)
 	{
-		int syncWordLength{ static_cast<int>(syncWord.size()) };
-		bool lastSyncWordBit = syncWord[syncWordLength - 1];
+		int dataLength{ static_cast<int>(data.size()) };
+		bool lastdataBit = data[dataLength - 1];
 
-		for (int i{ syncWordLength - 1 }; i > 0; i--)
+		for (int i{ dataLength - 1 }; i > 0; i--)
 		{
-			syncWord[i] = syncWord[i - 1];
+			data[i] = data[i - 1];
 		}
-		syncWord[0] = lastSyncWordBit;
+		data[0] = lastdataBit;
 
-		return syncWord;
+		return data;
 	}
 
 	bool moduloTwoAddition(bool firstBit, bool secondBit)
@@ -54,8 +54,24 @@ public:
 			bool scrambledBit{moduloTwoAddition(input[i], bitToScrambleWith)};
 
 			scrambledInput.push_back(scrambledBit);	
-			syncWord = reorganizeSyncWord(syncWord);
+			syncWord = reorganizeData(syncWord);
 		}
+		return scrambledInput;
+	}
+
+	std::vector<bool> scrambleMultiplicative(std::vector<bool> input)
+	{
+		int inputLength{ static_cast<int>(input.size()) };
+		std::vector<bool> scrambledInput;
+
+		for (int i{}; i < inputLength; i++)
+		{
+			bool scrambledBit{ input[17] * input[22] };
+
+			scrambledInput.push_back(scrambledBit);
+			reorganizeData(input);
+		}
+
 		return scrambledInput;
 	}
 

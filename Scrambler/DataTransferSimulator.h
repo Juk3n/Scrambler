@@ -30,15 +30,11 @@ class DataTransferSimulator
 	//chanceOfDisruption - w ci¹gu ilu wartoœci jest szansa na jedno przek³amanie
 	void sendThroughTransmissionCanalA(int chanceOfDisruption)
 	{
-		int iterator{};
-
 		for (bool bit : data)
 		{
-			iterator++;
-			if (iterator >= chanceOfDisruption)
+			if (random(0, chanceOfDisruption - 1) >= 1)
 			{
 				dataAfterSimulation.push_back(random(0, 1));
-				iterator = 0;
 			}
 			else
 			{
