@@ -66,7 +66,7 @@ public:
 
 		for (int i{}; i < inputLength; i++)
 		{
-			bool scrambledBit{ input[17] * input[22] };
+			bool scrambledBit{static_cast<bool>(input[17] * input[22]) };
 
 			scrambledInput.push_back(scrambledBit);
 			reorganizeData(input);
