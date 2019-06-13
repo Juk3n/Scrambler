@@ -34,11 +34,12 @@ class DataTransferSimulator
 		{
 			if (random(0, chanceOfDisruption - 1) >= 1)
 			{
-				dataAfterSimulation.push_back(random(0, 1));
+				dataAfterSimulation.push_back(bit);
 			}
 			else
 			{
-				dataAfterSimulation.push_back(bit);
+				numberOfRandomData++;
+				dataAfterSimulation.push_back(random(0, 1));
 			}
 		}
 	}
@@ -82,10 +83,14 @@ public:
 		this->data = data;
 	}
 
-	void simulateSendingData()
+	void simulateSendingData(char typeOfTransfer)
 	{
 		clearInformations();
-		sendThroughTransmissionCanalB(5);	
+
+		if (typeOfTransfer == 'A')
+			sendThroughTransmissionCanalA(1000);
+		else if (typeOfTransfer == 'B')
+			sendThroughTransmissionCanalB(5);
 	}
 
 	std::vector<bool> getDataAfterSimulation()

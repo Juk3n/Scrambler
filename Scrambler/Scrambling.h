@@ -58,22 +58,5 @@ public:
 		}
 		return scrambledInput;
 	}
-
-	std::vector<bool> scrambleMultiplicative(std::vector<bool> input)
-	{
-		int inputLength{ static_cast<int>(input.size()) };
-		std::vector<bool> scrambledInput;
-
-		for (int i{}; i < inputLength; i++)
-		{
-			bool scrambledBit{static_cast<bool>(input[17] * input[22]) };
-
-			scrambledInput.push_back(scrambledBit);
-			reorganizeData(input);
-		}
-
-		return scrambledInput;
-	}
-
 	~Scrambling() {}
 };
