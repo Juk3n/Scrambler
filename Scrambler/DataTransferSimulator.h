@@ -14,6 +14,12 @@ T random(T min, T max) {
 	return std::uniform_int_distribution<T>{min, max}(gen);
 }
 
+
+enum class SimulationType {
+	SimulationWithTheChanceOfDisruption,
+	SimulationWithTheDataDisruptionDependedOnOccurrence
+};
+
 class DataTransferSimulator
 {
 	int numberOfRandomData{};
@@ -27,8 +33,7 @@ class DataTransferSimulator
 		numberOfRandomData = 0;
 	}
 
-	//chanceOfDisruption - w ci¹gu ilu wartoœci jest szansa na jedno przek³amanie
-	void sendThroughTransmissionCanalA(int chanceOfDisruption)
+	void simulateWithTheChanceOfDisruption(int chanceOfDisruption)
 	{
 		for (bool bit : data)
 		{
@@ -44,8 +49,7 @@ class DataTransferSimulator
 		}
 	}
 
-	//kiedy zbyt wiele bitów obok siebie jest takich samych, nastêpuje przek³amanie
-	void sendThroughTransmissionCanalB(int acceptableLengthBitSeries)
+	void simulateWithTheDataDisruptionDependedOnOccurrence(int acceptableLengthBitSeries)
 	{
 		bool lastBit{ !data[0] };
 		int numOfRepetitions{};
@@ -83,14 +87,18 @@ public:
 		this->data = data;
 	}
 
-	void simulateSendingData(char typeOfTransfer)
+	void simulateSendingData(SimulationType typeOfTransfer)
 	{
 		clearInformations();
 
-		if (typeOfTransfer == 'A')
-			sendThroughTransmissionCanalA(1000);
-		else if (typeOfTransfer == 'B')
-			sendThroughTransmissionCanalB(5);
+		switch (typeOfTransfer) {
+		case SimulationType::SimulationWithTheChanceOfDisruption:
+			simulateWithTheChanceOfDisruption(1000);
+			break;
+		case SimulationType::SimulationWithTheDataDisruptionDependedOnOccurrence:
+			simulateWithTheDataDisruptionDependedOnOccurrence(5);
+			break;
+		}
 	}
 
 	std::vector<bool> getDataAfterSimulation()

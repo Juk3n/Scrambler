@@ -5,13 +5,13 @@
 
 class Histogram
 {
-	
+	std::vector<int> numberOfRepetitionsOfEachSize;
 public:
 	Histogram() {}
 
 	void create(std::vector<bool> data, bool whatToCount)
 	{
-		std::vector<int> numberOfRepetitionsOfEachSize;
+		numberOfRepetitionsOfEachSize.clear();
 		auto longestSerie{ 0 };
 		int sizeOfSerie{};
 
@@ -52,11 +52,23 @@ public:
 		if (sizeOfSerie > 0) numberOfRepetitionsOfEachSize[sizeOfSerie - 1] = numberOfRepetitionsOfEachSize[sizeOfSerie - 1] + 1;
 
 		std::cout << "\nSize of series | How many\n";
-		int iterator{};
-		for (auto numOfSeries : numberOfRepetitionsOfEachSize)
+	}
+
+	void show()
+	{
+		int iterator{1};
+		for (auto series : numberOfRepetitionsOfEachSize)
 		{
-			if(numOfSeries > 0) std::cout << iterator + 1 << " | " << numOfSeries << std::endl;
+			if (series == 0) break;
+			std::cout << iterator << " | ";
+			for (int i = 0; i < series/25; i++)
+			{
+				std::cout << (char)219;
+
+				if (i > 190) break;
+			}
 			iterator++;
+			std::cout << " " << series << std::endl;
 		}
 	}
 

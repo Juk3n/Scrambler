@@ -5,7 +5,7 @@
 
 class Scrambling
 {
-	std::vector<bool> createSyncWord(int length)
+	static std::vector<bool> createSyncWord(int length)
 	{
 		std::vector<bool> syncWord;
 		
@@ -17,7 +17,7 @@ class Scrambling
 		return syncWord;
 	}
 
-	std::vector<bool> reorganizeData(std::vector<bool> data)
+	static std::vector<bool> reorganizeData(std::vector<bool> data)
 	{
 		int dataLength{ static_cast<int>(data.size()) };
 		bool lastdataBit = data[dataLength - 1];
@@ -31,15 +31,13 @@ class Scrambling
 		return data;
 	}
 
-	bool moduloTwoAddition(bool firstBit, bool secondBit)
+	static bool moduloTwoAddition(bool firstBit, bool secondBit)
 	{
 		return static_cast<bool>(((int)firstBit + (int)secondBit) % 2);
 	}
 
 public:
-	Scrambling() {}
-
-	std::vector<bool> scrambleAdditive(std::vector<bool> input)
+	static std::vector<bool> scrambleAdditive(std::vector<bool> input)
 	{
 		int inputLength{ static_cast<int>(input.size()) };
 		std::vector<bool> syncWord{ createSyncWord(15) };
@@ -58,5 +56,7 @@ public:
 		}
 		return scrambledInput;
 	}
-	~Scrambling() {}
+	static std::vector<bool> scrambleMultiplicative(std::vector<bool> input) {
+
+	}
 };
