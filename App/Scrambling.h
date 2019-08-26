@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SCRAMBLING_H
+#define SCRAMBLING_H
 
 #include <vector>
 #include <memory>
@@ -60,3 +61,4 @@ public:
 
 	}
 };
+#endif

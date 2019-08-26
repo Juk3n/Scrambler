@@ -3,6 +3,12 @@
 
 #include <QMainWindow>
 
+#include "FileReader.h"
+#include "Scrambling.h"
+#include "DataTransferSimulator.h"
+#include "SimpleBitDataGenerator.h"
+#include "Histogram.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -15,8 +21,20 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void onLoadButtonClicked();
+    void onScrambleButtonClicked();
+    void onSendButtonClicked();
+
 private:
     Ui::MainWindow *ui;
+    QString logText{};
+
+    void startSimulation();
+    void printOnLog(QString text);
+    void simulateWith(std::vector<bool> data);
+
+
 };
 
 #endif // MAINWINDOW_H

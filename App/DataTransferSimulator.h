@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DATATRANSFERSIMULATION_H
+#define DATATRANSFERSIMULATION_H
 
 #include <vector>
 #include <functional>
@@ -6,13 +7,13 @@
 
 #include <iostream>
 
-thread_local std::mt19937 gen{ std::random_device{}() };
+//thread_local std::mt19937 gen{ std::random_device{}() };
 
 //random function by Pierun
-template<typename T>
-T random(T min, T max) {
-	return std::uniform_int_distribution<T>{min, max}(gen);
-}
+//template<typename T>
+//T random(T min, T max) {
+    //return std::uniform_int_distribution<T>{min, max}(gen);
+//}
 
 
 enum class SimulationType {
@@ -37,14 +38,14 @@ class DataTransferSimulator
 	{
 		for (bool bit : data)
 		{
-			if (random(0, chanceOfDisruption - 1) >= 1)
+            if (1)//random(0, chanceOfDisruption - 1) >= 1)
 			{
 				dataAfterSimulation.push_back(bit);
 			}
 			else
 			{
 				numberOfRandomData++;
-				dataAfterSimulation.push_back(random(0, 1));
+                dataAfterSimulation.push_back(1);//random(0, 1));
 			}
 		}
 	}
@@ -63,7 +64,7 @@ class DataTransferSimulator
 				if (numOfRepetitions >= acceptableLengthBitSeries)
 				{
 					numberOfRandomData++;
-					dataAfterSimulation.push_back(random(0, 1));
+                    dataAfterSimulation.push_back(1);//random(0, 1));
 				}
 				else
 				{
@@ -115,4 +116,4 @@ public:
 };
 
 
-
+#endif

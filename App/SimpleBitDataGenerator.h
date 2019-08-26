@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SIMPLEBITDATAGENERATOR_H
+#define SIMPLEBITDATAGENERATOR_H
 
 #include <vector>
 
@@ -11,3 +12,4 @@ public:
 	}
 };
 
+#endif

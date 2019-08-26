@@ -26,10 +26,17 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    mainold.cpp \
+    Scrambler.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+        DataTransferSimulator.h \
+        FileReader.h \
+        Histogram.h \
+        Scrambling.h \
+        SimpleBitDataGenerator.h
 
 FORMS += \
         mainwindow.ui
