@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QInputDialog>
 
 #include "FileReader.h"
 #include "Scrambling.h"
@@ -29,8 +30,11 @@ public slots:
 private:
     Ui::MainWindow *ui;
     QString logText{};
+    std::vector<bool> data;
 
-    void startSimulation();
+    QString getDataTypeFromUser();
+    void loadData(QString dataType); //przerobic na enum
+
     void printOnLog(QString text);
     void simulateWith(std::vector<bool> data);
 

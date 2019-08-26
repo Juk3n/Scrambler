@@ -13,7 +13,7 @@ class FileReader
 
 	std::string convertSetOfBitsOfCharToString(char c)
 	{
-		return std::bitset<16>(static_cast<int16_t>(c)).to_string();
+        return std::bitset<16>(static_cast<int16_t>(c)).to_string();
 	}
 
 	void addStringOfBitsToBits(std::string stringOfBits)
@@ -34,7 +34,7 @@ public:
 		if (!file.is_open())
 		{
 			file.close();
-			throw "Error while reading file";
+            throw "Error while reading file";
 		}
 		
 		file.seekg(0);

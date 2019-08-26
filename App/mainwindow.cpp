@@ -19,22 +19,9 @@ void MainWindow::printOnLog(QString text) {
     logText += ">";
     logText += text;
     logText += "\n";
-    //ui->plainTextEdit->setPlainText(logText);
+
     ui->plainTextEdit->insertPlainText(">" + text + "\n");
     ui->plainTextEdit->ensureCursorVisible();
-
-}
-
-void MainWindow::startSimulation() {
-    FileReader reader;
-    printOnLog("MP3 File Simulation");
-    simulateWith(reader.readFile("file.mp3"));
-
-    printOnLog("Only Zeros Series Simulation");
-    simulateWith(SimpleBitDataGenerator::generateData(0, 1000));
-
-    printOnLog("Only Ones Series Simulation");
-    simulateWith(SimpleBitDataGenerator::generateData(1, 1000));
 }
 
 void MainWindow::simulateWith(std::vector<bool> data) {
@@ -92,9 +79,42 @@ void MainWindow::simulateWith(std::vector<bool> data) {
 
 void MainWindow::onLoadButtonClicked() {
     printOnLog("Loading data");
+    QString dataType{ getDataTypeFromUser() };
+    printOnLog(dataType + " loaded");
+    loadData(dataType);
 }
+
+QString MainWindow::getDataTypeFromUser() {
+    QStringList dataTypes;
+    dataTypes << tr("MP3") << tr("Only zeros") << tr("Only ones");
+    bool ok;
+    QString dataType{QInputDialog::getItem(this, "Choose data type", tr("Types:"), dataTypes, 0, false, &ok)};
+
+    if(ok && !dataType.isEmpty()) {
+        return dataType;
+    }
+    else {
+        return "invalid type";
+    }
+}
+
+void MainWindow::loadData(QString dataType) {
+    if(dataType == "MP3") {
+        FileReader reader;
+        data = reader.readFile("D://Programowanie 2019//C++//Scrambler//App//file.mp3");
+    }
+    else if (dataType == "Only zeros") {
+        data = SimpleBitDataGenerator::generateData(0, 1000);
+    }
+    else if (dataType == "Only ones") {
+        data = SimpleBitDataGenerator::generateData(1, 1000);
+    }
+}
+
 void MainWindow::onScrambleButtonClicked() {
     printOnLog("Scrambling data");
+    data = Scrambling::scrambleAdditive(data);
+    printOnLog("Data scrambled");
 }
 void MainWindow::onSendButtonClicked(){
     printOnLog("Sending data");
