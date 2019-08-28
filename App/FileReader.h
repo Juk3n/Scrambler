@@ -9,14 +9,12 @@
 
 class FileReader
 {
-	std::vector<bool> bits{};
-
-	std::string convertSetOfBitsOfCharToString(char c)
+    static std::string convertSetOfBitsOfCharToString(char c)
 	{
         return std::bitset<16>(static_cast<int16_t>(c)).to_string();
 	}
 
-	void addStringOfBitsToBits(std::string stringOfBits)
+    static void addStringOfBitsToBits(std::string stringOfBits, std::vector<bool> bits)
 	{
 		for (char bit : stringOfBits)
 		{
@@ -25,11 +23,11 @@ class FileReader
 	}
 
 public:
-	FileReader() {}
 
-	std::vector<bool> readFile(std::string fileName)
+    static std::vector<bool> readFile(std::string fileName)
 	{
-		std::ifstream file{ fileName, std::ios::in | std::ios::binary };
+        std::vector<bool> bits{};
+        std::ifstream file{ "D://Programowanie 2019//C++//Scrambler//App//" + fileName, std::ios::in | std::ios::binary };
 
 		if (!file.is_open())
 		{
@@ -43,14 +41,14 @@ public:
 		{
 			std::string stringOfBits{ convertSetOfBitsOfCharToString(c) };
 			
-			addStringOfBitsToBits(stringOfBits);		
+            addStringOfBitsToBits(stringOfBits, bits);
 		}
 		
 		file.close();
 		return bits;
 	}
 
-	void saveToFile(std::vector<bool> dataToSave, std::string fileName)
+    static void saveToFile(std::vector<bool> dataToSave, std::string fileName)
 	{
 		std::ofstream file{ fileName, std::ios::out | std::ios::binary };
 
@@ -79,9 +77,5 @@ public:
 		file.close();
 	}
 
-	~FileReader() {}
 };
-
-
-
 #endif

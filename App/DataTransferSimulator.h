@@ -25,8 +25,7 @@ class DataTransferSimulator
 {
 	int numberOfRandomData{};
 
-	std::vector<bool> data;
-	std::vector<bool> dataAfterSimulation;
+    std::vector<bool> dataAfterSimulation{};
 	
 	void clearInformations()
 	{
@@ -34,7 +33,7 @@ class DataTransferSimulator
 		numberOfRandomData = 0;
 	}
 
-	void simulateWithTheChanceOfDisruption(int chanceOfDisruption)
+    void simulateWithTheChanceOfDisruption(int chanceOfDisruption, std::vector<bool> data)
 	{
 		for (bool bit : data)
 		{
@@ -50,7 +49,7 @@ class DataTransferSimulator
 		}
 	}
 
-	void simulateWithTheDataDisruptionDependedOnOccurrence(int acceptableLengthBitSeries)
+    void simulateWithTheDataDisruptionDependedOnOccurrence(int acceptableLengthBitSeries, std::vector<bool> data)
 	{
 		bool lastBit{ !data[0] };
 		int numOfRepetitions{};
@@ -83,23 +82,18 @@ class DataTransferSimulator
 public:
 	DataTransferSimulator() {}
 
-	void setDataToSend(std::vector<bool> data)
+    void simulateSendingData(SimulationType typeOfTransfer, std::vector<bool> data)
 	{
-		this->data = data;
-	}
+        clearInformations();
 
-	void simulateSendingData(SimulationType typeOfTransfer)
-	{
-		clearInformations();
-
-		switch (typeOfTransfer) {
+        switch (typeOfTransfer) {
 		case SimulationType::SimulationWithTheChanceOfDisruption:
-			simulateWithTheChanceOfDisruption(1000);
+            simulateWithTheChanceOfDisruption(1000, data);
 			break;
 		case SimulationType::SimulationWithTheDataDisruptionDependedOnOccurrence:
-			simulateWithTheDataDisruptionDependedOnOccurrence(5);
+            simulateWithTheDataDisruptionDependedOnOccurrence(5, data);
 			break;
-		}
+        }
 	}
 
 	std::vector<bool> getDataAfterSimulation()

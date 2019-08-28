@@ -33,7 +33,8 @@ private:
     std::vector<bool> data;
 
     QString getDataTypeFromUser();
-    void loadData(QString dataType); //przerobic na enum
+    void loadData(QString dataType);
+    void startSimulation();
 
     void printOnLog(QString text);
     void simulateWith(std::vector<bool> data);
