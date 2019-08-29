@@ -4,11 +4,35 @@
 #include <vector>
 #include <iostream>
 
+#include <QDialog>
+
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QChartView>
+using namespace QtCharts;
+
+
 class Histogram
 {
 	std::vector<int> numberOfRepetitionsOfEachSize;
 public:
-	Histogram() {}
+    Histogram() {
+        QDialog *dialog = new QDialog();
+
+
+        QLineSeries *series = new QLineSeries();
+            *series << QPointF(0, 6) << QPointF(9, 4) << QPointF(15, 20) << QPointF(25, 12) << QPointF(29, 26);
+            QChart *chart = new QChart();
+            chart->legend()->hide();
+            chart->addSeries(series);
+
+            QChartView *chartView = new QChartView(chart);
+                chartView->setRenderHint(QPainter::Antialiasing);
+
+                dialog->setExtension(chartView);
+
+        dialog->show();
+    }
+
 
 	void create(std::vector<bool> data, bool whatToCount)
 	{
@@ -72,7 +96,6 @@ public:
 			std::cout << " " << series << std::endl;
 		}
 	}
-
 	~Histogram() {}
 };
 

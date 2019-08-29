@@ -23,6 +23,7 @@ void MainWindow::printOnLog(QString text) {
     ui->plainTextEdit->ensureCursorVisible();
     ui->plainTextEdit->insertPlainText(">" + text + "\n");
     ui->plainTextEdit->ensureCursorVisible();
+
 }
 
 void MainWindow::simulateWith(std::vector<bool> data) {
@@ -88,8 +89,13 @@ void MainWindow::onScrambleButtonClicked() {
 
 void MainWindow::onSendButtonClicked(){
     printOnLog("Sending data");
+    if(data.empty()) {
+        printOnLog("No data provided");
+        return;
+    }
     startSimulation();
     printOnLog("Data sent");
+    Histogram histogram;
 }
 
 void MainWindow::startSimulation() {
