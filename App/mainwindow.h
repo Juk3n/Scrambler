@@ -4,11 +4,11 @@
 #include <QMainWindow>
 #include <QInputDialog>
 
+#include "histogram.h"
 #include "FileReader.h"
 #include "Scrambling.h"
 #include "DataTransferSimulator.h"
 #include "SimpleBitDataGenerator.h"
-#include "Histogram.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,9 +27,14 @@ public slots:
     void onScrambleButtonClicked();
     void onSendButtonClicked();
 
+private slots:
+    void on_HistogramButton_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QString logText{};
+    Histogram *histogram;
+
+    QString logText;
     std::vector<bool> data;
 
     QString getDataTypeFromUser();
@@ -37,9 +42,6 @@ private:
     void startSimulation();
 
     void printOnLog(QString text);
-    void simulateWith(std::vector<bool> data);
-
-
 };
 
 #endif // MAINWINDOW_H

@@ -1,12 +1,12 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-08-23T12:14:46
+# Project created by QtCreator 2019-09-02T13:04:08
 #
 #-------------------------------------------------
 
-QT       += core gui charts
+QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = App
 TEMPLATE = app
@@ -25,18 +25,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        histogram.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        qcustomplot.cpp
 
 HEADERS += \
-        mainwindow.h \
         DataTransferSimulator.h \
         FileReader.h \
-        Histogram.h \
         Scrambling.h \
-        SimpleBitDataGenerator.h
+        SimpleBitDataGenerator.h \
+        histogram.h \
+        mainwindow.h \
+        qcustomplot.h
 
 FORMS += \
+        histogram.ui \
         mainwindow.ui
 
 # Default rules for deployment.

@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -26,36 +29,9 @@ void MainWindow::printOnLog(QString text) {
 
 }
 
-void MainWindow::simulateWith(std::vector<bool> data) {
-    DataTransferSimulator simulation{};
-
-
-    //printOnLogPanel("data size: " + data.size());
-    //printOnLogPanel(std::string().append("number of bits lost: ").append(simulation.getNumberOfRandomData()));
-    //std::cout << "number of bits lost: " << simulation.getNumberOfRandomData() << std::endl;
-
-    //Przesłanie danych ze scramblerem
-    //std::cout << "data size: " << dataAfterScrambling.size() << std::endl;
-    //std::cout << "number of bits lost: " << simulation.getNumberOfRandomData() << std::endl;
-
-
-    //Przesłanie danych bez scramblera
-
-    //std::cout << "data size: " << data.size() << std::endl;
-    //std::cout << "number of bits lost: " << simulation.getNumberOfRandomData() << std::endl;
-
-    //Przesłanie danych ze scramblerem
-
-
-    //std::cout << "data size: " << dataAfterScrambling.size() << std::endl;
-    //std::cout << "number of bits lost: " << simulation.getNumberOfRandomData() << std::endl;
-
-    //std::cout << "\nHistogramy\n";
-}
-
 void MainWindow::onLoadButtonClicked() {
     printOnLog("Loading data");
-    QString dataType{ getDataTypeFromUser() };    
+    QString dataType{ getDataTypeFromUser() };
     loadData(dataType);
     printOnLog(dataType + " loaded");
     printOnLog("Data size: " + QString::fromStdString(std::to_string(data.size())));
@@ -95,7 +71,6 @@ void MainWindow::onSendButtonClicked(){
     }
     startSimulation();
     printOnLog("Data sent");
-    Histogram histogram;
 }
 
 void MainWindow::startSimulation() {
@@ -103,4 +78,10 @@ void MainWindow::startSimulation() {
 
     simulation.simulateSendingData(SimulationType::SimulationWithTheDataDisruptionDependedOnOccurrence, data);
     printOnLog("Number of lost bits: " + QString::fromStdString(std::to_string(simulation.getNumberOfRandomData())));
+}
+
+void MainWindow::on_HistogramButton_clicked()
+{
+    histogram = new Histogram(this, data);
+    histogram->show();
 }
