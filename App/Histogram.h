@@ -3,6 +3,10 @@
 
 #include <QDialog>
 
+#include <map>
+#include <unordered_set>
+#include <algorithm>
+
 namespace Ui {
 class Histogram;
 }
@@ -17,6 +21,11 @@ public:
 
 private:
     Ui::Histogram *ui;
+    QVector<double> x;
+    QVector<double> y;
+
+    void prepareData(const std::vector<bool> &data);
+    void createHistogram();
 };
 
 #endif // HISTOGRAM_H
