@@ -26,6 +26,7 @@ public slots:
     void onLoadButtonClicked();
     void onScrambleButtonClicked();
     void onSendButtonClicked();
+    void onSaveButtonClicked();
 
 private slots:
     void on_HistogramButton_clicked();

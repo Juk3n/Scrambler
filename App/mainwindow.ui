@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>672</width>
-    <height>523</height>
+    <width>661</width>
+    <height>514</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Scrambler</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(60, 60, 60);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPlainTextEdit" name="plainTextEdit">
@@ -20,7 +23,7 @@
       <x>10</x>
       <y>10</y>
       <width>441</width>
-      <height>441</height>
+      <height>431</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -90,7 +93,7 @@ QPushButton:default {
       <widget class="QPushButton" name="ScrambleButton">
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>84</width>
          <height>80</height>
         </size>
        </property>
@@ -127,7 +130,7 @@ QPushButton:default {
       <widget class="QPushButton" name="SendDataButton">
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>84</width>
          <height>80</height>
         </size>
        </property>
@@ -164,7 +167,7 @@ QPushButton:default {
       <widget class="QPushButton" name="HistogramButton">
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>84</width>
          <height>80</height>
         </size>
        </property>
@@ -201,7 +204,7 @@ QPushButton:default {
       <widget class="QPushButton" name="SaveDataButton">
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>84</width>
          <height>80</height>
         </size>
        </property>
@@ -242,7 +245,7 @@ QPushButton:default {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>672</width>
+     <width>661</width>
      <height>25</height>
     </rect>
    </property>

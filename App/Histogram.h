@@ -16,7 +16,8 @@ class Histogram : public QDialog
     Q_OBJECT
 
 public:
-    explicit Histogram(QWidget *parent = nullptr, std::vector<bool> data = std::vector<bool>());
+    explicit Histogram(QWidget *parent = nullptr);
+    Histogram(QWidget *parent,  std::vector<bool> &data);
     ~Histogram();
 
 private:

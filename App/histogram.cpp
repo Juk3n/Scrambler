@@ -8,12 +8,18 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-Histogram::Histogram(QWidget *parent, std::vector<bool> data) :
+Histogram::Histogram(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Histogram)
 {
     ui->setupUi(this);
+}
 
+Histogram::Histogram(QWidget *parent, std::vector<bool> &data) :
+    QDialog(parent),
+    ui(new Ui::Histogram)
+{
+    ui->setupUi(this);
     prepareData(data);
     createHistogram();
 }

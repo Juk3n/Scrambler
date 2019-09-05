@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->LoadDataButton, SIGNAL(clicked(bool)), this, SLOT(onLoadButtonClicked()));
     connect(ui->ScrambleButton, SIGNAL(clicked(bool)), this, SLOT(onScrambleButtonClicked()));
     connect(ui->SendDataButton, SIGNAL(clicked(bool)), this, SLOT(onSendButtonClicked()));
+    connect(ui->SaveDataButton, SIGNAL(clicked(bool)), this, SLOT(onSaveButtonClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -73,6 +74,19 @@ void MainWindow::onSendButtonClicked(){
     printOnLog("Data sent");
 }
 
+void MainWindow::onSaveButtonClicked()
+{
+    printOnLog("Saving data");
+
+    if(data.empty()) {
+        printOnLog("No data provided");
+        return;
+    }
+    FileReader::saveToFile(data, "saved.mp3");
+
+    printOnLog("Data saved");
+}
+
 void MainWindow::startSimulation() {
     DataTransferSimulator simulation{};
 
@@ -85,3 +99,5 @@ void MainWindow::on_HistogramButton_clicked()
     histogram = new Histogram(this, data);
     histogram->show();
 }
+
+
